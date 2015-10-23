@@ -4,13 +4,13 @@ speedtest-cli
 Command line interface for testing internet bandwidth using
 speedtest.net
 
-.. image:: https://pypip.in/v/speedtest-cli/badge.png
+.. image:: https://img.shields.io/pypi/v/speedtest-cli.svg
         :target: https://pypi.python.org/pypi/speedtest-cli/
         :alt: Latest Version
-.. image:: https://pypip.in/d/speedtest-cli/badge.png
+.. image:: https://img.shields.io/pypi/dm/speedtest-cli.svg
         :target: https://pypi.python.org/pypi/speedtest-cli/
         :alt: Downloads
-.. image:: https://pypip.in/license/speedtest-cli/badge.png
+.. image:: https://img.shields.io/pypi/l/speedtest-cli.svg
         :target: https://pypi.python.org/pypi/speedtest-cli/
         :alt: License
 
@@ -18,6 +18,10 @@ Versions
 --------
 
 speedtest-cli works with Python 2.4-3.4
+
+.. image:: https://img.shields.io/pypi/pyversions/speedtest-cli.svg
+        :target: https://pypi.python.org/pypi/speedtest-cli/
+        :alt: Versions
 
 Installation
 ------------
@@ -72,7 +76,7 @@ Usage
     $ speedtest-cli -h
     usage: speedtest-cli [-h] [--bytes] [--share] [--simple] [--list]
                          [--server SERVER] [--mini MINI] [--source SOURCE]
-                         [--timeout TIMEOUT] [--version]
+                         [--timeout TIMEOUT] [--secure] [--version]
 
     Command line interface for testing internet bandwidth using speedtest.net.
     --------------------------------------------------------------------------
@@ -91,6 +95,8 @@ Usage
       --mini MINI        URL of the Speedtest Mini server
       --source SOURCE    Source IP address to bind to
       --timeout TIMEOUT  HTTP timeout in seconds. Default 10
+      --secure           Use HTTPS instead of HTTP when communicating with
+                         speedtest.net operated servers
       --version          Show the version number and exit
 
 Inconsistency

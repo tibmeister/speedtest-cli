@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2012-2014 Matt Martz
+# Copyright 2012-2015 Matt Martz
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -25,7 +25,7 @@ import timeit
 import platform
 import threading
 
-__version__ = '0.3.3a'
+__version__ = '0.3.4'
 
 # Some global variables we use
 user_agent = None
@@ -419,6 +419,8 @@ def closestServers(client, all=False):
     urls = [
         '://www.speedtest.net/speedtest-servers-static.php',
         '://c.speedtest.net/speedtest-servers-static.php',
+        '://www.speedtest.net/speedtest-servers.php',
+        '://c.speedtest.net/speedtest-servers.php',
     ]
     errors = []
     servers = {}
@@ -586,7 +588,7 @@ def speedtest():
     parser.add_argument('--timeout', default=10, type=int,
                         help='HTTP timeout in seconds. Default 10')
     parser.add_argument('--secure', action='store_true',
-                        help='Use HTTPS instead of HTTP when communicating'
+                        help='Use HTTPS instead of HTTP when communicating '
                              'with speedtest.net operated servers')
     parser.add_argument('--version', action='store_true',
                         help='Show the version number and exit')
@@ -633,16 +635,7 @@ def speedtest():
                 line = ('%(id)4s) %(sponsor)s (%(name)s, %(country)s) '
                         '[%(d)0.2f km]' % server)
                 serverList.append(line)
-            # Python 2.7 and newer seem to be ok with the resultant encoding
-            # from parsing the XML, but older versions have some issues.
-            # This block should detect whether we need to encode or not
-            try:
-                unicode()
-                print_('\n'.join(serverList).encode('utf-8', 'ignore'))
-            except NameError:
-                print_('\n'.join(serverList))
-            except IOError:
-                pass
+            print_('\n'.join(serverList).encode('utf-8', 'ignore'))
             sys.exit(0)
     else:
         servers = closestServers(config['client'])
@@ -710,16 +703,8 @@ def speedtest():
         best = getBestServer(servers)
 
     if not args.simple:
-        # Python 2.7 and newer seem to be ok with the resultant encoding
-        # from parsing the XML, but older versions have some issues.
-        # This block should detect whether we need to encode or not
-        try:
-            unicode()
-            print_(('Hosted by %(sponsor)s (%(name)s) [%(d)0.2f km]: '
-                   '%(latency)s ms' % best).encode('utf-8', 'ignore'))
-        except NameError:
-            print_('Hosted by %(sponsor)s (%(name)s) [%(d)0.2f km]: '
-                   '%(latency)s ms' % best)
+        print_(('Hosted by %(sponsor)s (%(name)s) [%(d)0.2f km]: '
+               '%(latency)s ms' % best).encode('utf-8', 'ignore'))
     else:
         print_('Ping: %(latency)s ms' % best)
 
@@ -797,7 +782,7 @@ def speedtest():
             sys.exit(1)
 
         print_('Share results: %s://www.speedtest.net/result/%s.png' %
-               scheme, resultid[0])
+               (scheme, resultid[0]))
 
 
 def main():
