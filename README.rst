@@ -119,3 +119,10 @@ There are several concepts to be aware of that factor into the potential inconsi
 
 Issues relating to inconsistencies will be closed as wontfix and without
 additional reason or context.
+
+Loggin to RRDTool
+-----------------
+
+The createRRD.sh script will create the rrd file with the proper settings.  Make sure to edit this to reflect the location you want it to be in!
+
+The speedtest.sh script will execute sppedtest_cli.py and log the results into the rrd file.  Make sure to edit this to reflect the location of the RRD file!
