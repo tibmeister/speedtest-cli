@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rrdtool create rrd/speedtest.rrd --step 60 DS:ms:GAUGE:600:0:5000 DS:dl:GAUGE:600:0:10000 DS:upl:GAUGE:600:0:10000 RRA:AVERAGE:0.5:1:5000 RRA:MIN:0.5:12:2400 RRA:MAX:0.5:12:2400 RRA:AVERAGE:0.5:12:2400
+
